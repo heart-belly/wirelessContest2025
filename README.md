@@ -18,7 +18,7 @@
 ## 解题思路
 题目简化后的问题就是如何调度计算图中的计算节点，事实上就是一种jsp问题的变种，考虑到是np-hard问题以及对于赛题测试用例的观察后摒弃使用精确解法，而使用贪心+启发式的方式来解决该问题。
 ## 调度策略：
-调度某个计算节点的时候，需要考虑到该节点的最早开始时间，后续依赖节点的数量以及后续节点形成调度链的可能的节束时间等因素。综合三个因素，设计了一种优先级评分函数构造形式如下：
+调度某个计算节点的时候，需要考虑到该节点的最早开始时间，后续依赖节点的数量以及后续节点形成调度链的可能的节点时间等因素。综合三个因素，设计了一种优先级评分函数构造形式如下：
 ```
 constexpr ull startFactor, timeFactor, numberFactor;
 double priority = ( 1.0 * startFactor * succStart - 1.0 * timeFactor * (timelines[node] + numberFactor * allNodes[node].successors.size()));
